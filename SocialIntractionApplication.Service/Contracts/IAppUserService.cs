@@ -1,14 +1,13 @@
 ﻿using SocialIntractionApplication.Repository.Entities;
-using SocialIntractionApplication.Repository.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocialIntractionApplication.Repository.Contracts
+namespace SocialIntractionApplication.Service.Contracts
 {
-    public interface IAppUserRepository : IGenericRepository<AppUser>
+    public interface IAppUserService : IGenericService<AppUser>
     {
         Task<IEnumerable<AppUser>> GetUsersByOrderName(string userFirstName);
     }

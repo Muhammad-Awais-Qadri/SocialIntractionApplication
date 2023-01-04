@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SocialIntractionApplication.Repository.Contracts
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IGenericRepository<TEntity> where TEntity : class
     {
-        Task<TEntity> GetById(int id);
+        Task<TEntity> GetById(Guid id);
         Task<IEnumerable<TEntity>> GetAll();
         Task<IEnumerable<TEntity>> FindAll(Expression<Func<TEntity, bool>> predicate);
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SocialIntractionApplication.Repository.Repositories
 {
-    public class AppUserRepository : Repository<AppUser>, IAppUserRepository
+    public class AppUserRepository : GenericRepository<AppUser>, IAppUserRepository
     {
         public AppUserRepository(ApplicationDbContext dbContext): base(dbContext)
         {

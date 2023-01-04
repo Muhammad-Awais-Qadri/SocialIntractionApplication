@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 
 namespace SocialIntractionApplication.Repository.Repositories
 {
-    internal class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _dbContext;
+        public IAppUserRepository UserRepository { get; private set; }
+
         public UnitOfWork(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
             UserRepository = new AppUserRepository(_dbContext);
         }
 
-        public IAppUserRepository UserRepository { get; private set; }
         public async Task<int> AsyncComplete() => await _dbContext.SaveChangesAsync();
         public void Dispose() => _dbContext.Dispose();
     }

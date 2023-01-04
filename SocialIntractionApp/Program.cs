@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using SocialIntractionApplication.Repository;
+using SocialIntractionApplication.Repository.Contracts;
+using SocialIntractionApplication.Repository.Repositories;
+using SocialIntractionApplication.Service.Contracts;
+using SocialIntractionApplication.Service.Services;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,8 +13,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-options.UseSqlServer("Data Source=AWAISPC\\MSSQLSERVERDEV;Initial Catalog=SocialInteractionDB;User Id=sa;Password=Allahoneha;"));
+    options.UseSqlServer("Data Source=AWAISPC\\MSSQLSERVERDEV;Initial Catalog=SocialInteractionDB;User Id=sa;Password=Allahoneha;Trust Server Certificate=true;"));
+
+//register services
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IAppUserService, AppUserService>();
 
 var app = builder.Build();
 

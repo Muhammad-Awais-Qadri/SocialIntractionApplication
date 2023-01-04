@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialIntractionApp", "SocialIntractionApp\SocialIntractionApp.csproj", "{216C28B3-9075-45FF-9A24-9FA6FA6AD10A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialIntractionApplication.Repository", "SocialIntractionApplication.Repository\SocialIntractionApplication.Repository.csproj", "{23C1AAE4-DFCF-47A0-9CB0-BF6F7AB15C9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialIntractionApplication.Repository", "SocialIntractionApplication.Repository\SocialIntractionApplication.Repository.csproj", "{23C1AAE4-DFCF-47A0-9CB0-BF6F7AB15C9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialIntractionApplication.Service", "SocialIntractionApplication.Service\SocialIntractionApplication.Service.csproj", "{3C7327EC-93E5-4EBD-B7C6-94B614407EA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{23C1AAE4-DFCF-47A0-9CB0-BF6F7AB15C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23C1AAE4-DFCF-47A0-9CB0-BF6F7AB15C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23C1AAE4-DFCF-47A0-9CB0-BF6F7AB15C9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C7327EC-93E5-4EBD-B7C6-94B614407EA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C7327EC-93E5-4EBD-B7C6-94B614407EA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C7327EC-93E5-4EBD-B7C6-94B614407EA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C7327EC-93E5-4EBD-B7C6-94B614407EA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

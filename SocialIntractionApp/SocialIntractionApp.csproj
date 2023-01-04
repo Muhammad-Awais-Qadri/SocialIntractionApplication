@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SocialIntractionApplication.Repository\SocialIntractionApplication.Repository.csproj" />
+    <ProjectReference Include="..\SocialIntractionApplication.Service\SocialIntractionApplication.Service.csproj" />
   </ItemGroup>
 
 </Project>

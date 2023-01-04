@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace SocialIntractionApplication.Repository.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
         protected readonly DbContext _dbContext;
-        public Repository(DbContext dbContext)
+        public GenericRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -23,7 +23,7 @@ namespace SocialIntractionApplication.Repository.Repositories
         public async Task<IEnumerable<TEntity>> GetAll() =>
             await _dbContext.Set<TEntity>().ToListAsync();
 
-        public async Task<TEntity> GetById(int id) =>
+        public async Task<TEntity> GetById(Guid id) =>
             await _dbContext.Set<TEntity>().FindAsync(id);
 
         public void Add(TEntity entity) =>
