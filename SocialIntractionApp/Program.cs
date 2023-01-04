@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SocialIntractionApplication.Repository;
 using SocialIntractionApplication.Repository.Contracts;
 using SocialIntractionApplication.Repository.Repositories;
@@ -15,7 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer("Data Source=AWAISPC\\MSSQLSERVERDEV;Initial Catalog=SocialInteractionDB;User Id=sa;Password=Allahoneha;Trust Server Certificate=true;"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 //register services
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

@@ -1,2 +1,10 @@
 ﻿
+________________________________
+--------------------------------
+MBI : Muhammad Awais Qadri ;)
+________________________________
+--------------------------------
+
 Here i will explain the procedures.
+
+1) I will impliment the repository pattern using unit of work.
