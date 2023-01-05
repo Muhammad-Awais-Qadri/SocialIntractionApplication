@@ -9,6 +9,7 @@ namespace SocialIntractionApplication.Service.Contracts
 {
     public interface IAppUserService : IGenericService<AppUser>
     {
-        Task<IEnumerable<AppUser>> GetUsersByOrderName(string userFirstName);
+        Task<IEnumerable<AppUser>> FindUsersByName(string userFirstName);
+        Task<bool> IsExistByEmail(string userEmail);
     }
 }

@@ -12,12 +12,16 @@ namespace SocialIntractionApplication.Repository.Repositories
 {
     public class AppUserRepository : GenericRepository<AppUser>, IAppUserRepository
     {
-        public AppUserRepository(ApplicationDbContext dbContext): base(dbContext)
+        public AppUserRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
 
         }
-        public async Task<IEnumerable<AppUser>> GetUsersByOrderName(string userFirstName) =>
+
+        public async Task<IEnumerable<AppUser>> FindUsersByName(string userFirstName) =>
             await ApplicationDbContext.AppUsers.Where(u => u.FirstName.Contains(userFirstName)).ToListAsync();
+
+        public async Task<bool> IsExistByEmail(string userEmail) =>
+            await ApplicationDbContext.AppUsers.AnyAsync(u => u.Email.Equals(userEmail));
 
         public ApplicationDbContext ApplicationDbContext
         {

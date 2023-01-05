@@ -18,5 +18,8 @@ namespace SocialIntractionApplication.Repository.Entities
         public string LastName { get; set; }
         [MaxLength(50)]
         public string Email { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
+
     }
 }

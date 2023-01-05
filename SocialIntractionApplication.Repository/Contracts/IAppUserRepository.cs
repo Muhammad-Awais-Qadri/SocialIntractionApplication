@@ -10,6 +10,7 @@ namespace SocialIntractionApplication.Repository.Contracts
 {
     public interface IAppUserRepository : IGenericRepository<AppUser>
     {
-        Task<IEnumerable<AppUser>> GetUsersByOrderName(string userFirstName);
+        Task<IEnumerable<AppUser>> FindUsersByName(string userFirstName);
+        Task<bool> IsExistByEmail(string userEmail);
     }
 }
