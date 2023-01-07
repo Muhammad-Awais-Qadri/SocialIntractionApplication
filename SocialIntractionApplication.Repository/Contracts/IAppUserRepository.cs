@@ -11,6 +11,7 @@ namespace SocialIntractionApplication.Repository.Contracts
     public interface IAppUserRepository : IGenericRepository<AppUser>
     {
         Task<IEnumerable<AppUser>> FindUsersByName(string userFirstName);
+        Task<AppUser?> FindUsersByEmail(string userEmail);
         Task<bool> IsExistByEmail(string userEmail);
     }
 }

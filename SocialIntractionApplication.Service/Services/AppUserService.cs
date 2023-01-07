@@ -28,6 +28,9 @@ namespace SocialIntractionApplication.Service.Services
         public async Task<IEnumerable<AppUser>> FindUsersByName(string userFirstName) =>
             await _unitOfWork.UserRepository.FindUsersByName(userFirstName);
 
+        public async Task<AppUser?> FindUsersByEmail(string userEmail) =>
+            await _unitOfWork.UserRepository.FindUsersByEmail(userEmail);
+
         public async Task<bool> IsExistByEmail(string userEmail) =>
             await _unitOfWork.UserRepository.IsExistByEmail(userEmail);
 

@@ -43,5 +43,22 @@ namespace SocialIntractionApp.Controllers
             return appUser;
         }
 
+        [HttpPost("login")]
+        public async Task<ActionResult<AppUser>> LoginUser(LoginDto dto)
+        {
+            AppUser? appUser = await _appUserService.FindUsersByEmail(dto.Email);
+            if (appUser == null) return Unauthorized(Utility.InvalidUser);
+
+            using var hmac = new HMACSHA512(appUser.PasswordSalt);
+
+            var computeHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(dto.Password));
+            for (int i = 0; i < computeHash.Length; i++)
+            {
+                if (computeHash[i] != appUser.PasswordHash[i]) return Unauthorized(Utility.InvalidPassword);
+            }
+
+            return appUser;
+        }
+
     }
 }

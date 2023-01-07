@@ -20,6 +20,9 @@ namespace SocialIntractionApplication.Repository.Repositories
         public async Task<IEnumerable<AppUser>> FindUsersByName(string userFirstName) =>
             await ApplicationDbContext.AppUsers.Where(u => u.FirstName.Contains(userFirstName)).ToListAsync();
 
+        public async Task<AppUser?> FindUsersByEmail(string userEmail) =>
+            await ApplicationDbContext.AppUsers.SingleOrDefaultAsync(u => u.Email.Equals(userEmail));
+
         public async Task<bool> IsExistByEmail(string userEmail) =>
             await ApplicationDbContext.AppUsers.AnyAsync(u => u.Email.Equals(userEmail));
 
