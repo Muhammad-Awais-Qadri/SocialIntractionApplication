@@ -1,11 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using SocialIntractionApplication.Repository;
-using SocialIntractionApplication.Repository.Contracts;
-using SocialIntractionApplication.Repository.Repositories;
-using SocialIntractionApplication.Service.Contracts;
-using SocialIntractionApplication.Service.Services;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using SocialIntractionApp.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,12 +8,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddApplicationServices(builder.Configuration);
 
-//register services
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IAppUserService, AppUserService>();
+builder.Services.AddIdentityServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -32,6 +22,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

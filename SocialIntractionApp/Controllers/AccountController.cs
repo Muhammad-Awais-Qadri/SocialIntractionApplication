@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SocialIntractionApp.DTOs;
+using SocialIntractionApp.DTOs.Authentication;
 using SocialIntractionApp.Utilites;
 using SocialIntractionApplication.Repository.Contracts;
 using SocialIntractionApplication.Repository.Entities;
@@ -14,14 +14,21 @@ namespace SocialIntractionApp.Controllers
     {
         private readonly IAppUserService _appUserService;
         private readonly IUnitOfWork _unitOfWork;
-        public AccountController(IAppUserService appUserService, IUnitOfWork unitOfWork)
+        private readonly ITokenService _tokenService;
+
+        public AccountController(
+            IAppUserService appUserService,
+            IUnitOfWork unitOfWork,
+            ITokenService tokenService
+            )
         {
             _appUserService = appUserService;
             _unitOfWork = unitOfWork;
+            _tokenService = tokenService;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<AppUser>> RegisterUser(RegisterDto dto)
+        public async Task<ActionResult<UserTokenDto>> RegisterUser(RegisterDto dto)
         {
             if (await _appUserService.IsExistByEmail(dto.Email))
                 return BadRequest(Utility.AllReadyUserExistWithSameEmail);
@@ -40,24 +47,24 @@ namespace SocialIntractionApp.Controllers
             _appUserService.Add(appUser);
             await _unitOfWork.AsyncComplete();
 
-            return appUser;
+            return new UserTokenDto { UserEmail = appUser.Email, Token = _tokenService.CreateToken(appUser) };
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<AppUser>> LoginUser(LoginDto dto)
+        public async Task<ActionResult<UserTokenDto>> LoginUser(LoginDto dto)
         {
             AppUser? appUser = await _appUserService.FindUsersByEmail(dto.Email);
-            if (appUser == null) return Unauthorized(Utility.InvalidUser);
+            if (appUser == null) return Unauthorized(Utility.UserInvalid);
 
             using var hmac = new HMACSHA512(appUser.PasswordSalt);
 
             var computeHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(dto.Password));
             for (int i = 0; i < computeHash.Length; i++)
             {
-                if (computeHash[i] != appUser.PasswordHash[i]) return Unauthorized(Utility.InvalidPassword);
+                if (computeHash[i] != appUser.PasswordHash[i]) return Unauthorized(Utility.PasswordInvalid);
             }
 
-            return appUser;
+            return new UserTokenDto { UserEmail = appUser.Email, Token = _tokenService.CreateToken(appUser) };
         }
 
     }
