@@ -15,9 +15,11 @@ namespace SocialIntractionApplication.Service.Services
     public class TokenService : ITokenService
     {
         private readonly SymmetricSecurityKey _key;
+        private readonly double _expiryDays;
         public TokenService(IConfiguration config)
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
+            _expiryDays = Convert.ToDouble(config["TokenKey"]);
         }
         public string CreateToken(AppUser user)
         {
@@ -30,7 +32,7 @@ namespace SocialIntractionApplication.Service.Services
             var tokenDec = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(_expiryDays),
                 SigningCredentials = creds
             };
 
