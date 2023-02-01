@@ -19,7 +19,7 @@ namespace SocialIntractionApplication.Service.Services
         public TokenService(IConfiguration config)
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
-            _expiryDays = Convert.ToDouble(config["TokenKey"]);
+            _expiryDays = Convert.ToDouble(config["TokenExpiryInDays"]);
         }
         public string CreateToken(AppUser user)
         {

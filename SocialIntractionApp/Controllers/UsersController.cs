@@ -6,8 +6,6 @@ using SocialIntractionApplication.Service.Contracts;
 
 namespace SocialIntractionApp.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
     [Authorize]
     public class UsersController : ApiBaseController
     {
@@ -17,8 +15,8 @@ namespace SocialIntractionApp.Controllers
             _appUserService = appUserService;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<AppUserInfo>> GetAllUsers()
+        [HttpGet("getusers")]
+        public async Task<IEnumerable<AppUserInfo>> GetUsers()
         {
             IEnumerable<AppUser> appUsers = await _appUserService.GetAll();
 
@@ -40,7 +38,7 @@ namespace SocialIntractionApp.Controllers
             return users;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("getuserbyid/{id}")]
         public async Task<AppUserInfo> GetUserById(Guid id)
         {
             AppUser appUser = await _appUserService.GetById(id);

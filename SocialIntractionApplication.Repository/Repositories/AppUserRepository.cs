@@ -28,7 +28,7 @@ namespace SocialIntractionApplication.Repository.Repositories
 
         public ApplicationDbContext ApplicationDbContext
         {
-            get { return _dbContext as ApplicationDbContext; }
+            get { return (ApplicationDbContext)_dbContext; }
         }
     }
 }
